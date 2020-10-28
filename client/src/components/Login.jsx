@@ -1,21 +1,38 @@
-import React from 'react';
-
-
-const AUTH_ENDPOINT = "https://trakt.tv/oauth/authorize"
-const CLIENT_ID = "d5ef030b36b283b2695c90ce322a7ff50317bfcff52d83743b7e25cb07b37cbc"
-const REDIRECT_URI = "http://127.0.0.1:3000/auth/"
-// "?response_type=code&client_id=%20&redirect_uri=%20&state=%20"
+import React, {useEffect, useState}from 'react';
+const axios = require('axios');
 
 let auth = () =>{
    window.location = "http://127.0.0.1:3000/auth/trakt";
 }
-
+let isAuthed = false;
+    
 const Login = () => {
-    return (
-        <button onClick={auth} className='btn-login'>
-            Login with Trakt
-        </button>
-      );
+    const [isLogged, setIsLogged] = useState(false);
+
+    useEffect(() => {
+        const authed = axios({
+            method: "GET",
+            url: "/auth/user"
+ 
+        }).then((res) => {
+            setIsLogged(res.status ===200);
+        }).catch((err)=>{
+            //do nothing
+        });
+    })
+
+
+    if (!isLogged) {
+        console.log("not Authed")
+        return (
+            <button onClick={auth} className='btn-login'>
+                Login with Trakt
+            </button>
+        );
+    }else{
+        return null;
+    }
+
 }
  
 export default Login;

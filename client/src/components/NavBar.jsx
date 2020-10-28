@@ -1,20 +1,23 @@
-const { useEffect } = require("react")
+import React, {Component} from 'react'
 const { default: Login } = require("./Login")
 
-const NavBar = () => {
-    return ( 
-        <nav className="navBar">
-            <ul className="navList">
-                <li className="navItem">
-                    <a href='#'>Home</a>
-                </li>
-                <li className="navItem">
-                    <a href='#'>Watched</a>
-                </li>
-            </ul>
-            <Login />
-        </nav>
-     );
+class NavBar extends Component {
+    render() {
+
+        return (
+            <nav className="navBar">
+                <ul className="navList">
+                    <li className="navItem">
+                        <a href='#'>Home</a>
+                    </li>
+                    <li className="navItem">
+                        <a href='#'>Watched</a>
+                    </li>
+                </ul>
+                <Login />
+            </nav>
+        );
+    }
 }
- 
+
 export default NavBar;
