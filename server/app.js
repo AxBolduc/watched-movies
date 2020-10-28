@@ -30,10 +30,8 @@ app.get('/auth/trakt/callback', passport.authenticate('trakt', {failureRedirect:
     res.redirect('/');
 });
 app.get('/auth/user', (req, res) =>{
-    console.log("hit");
     if(req.user){
         res.status(200).send({"user": req.user.username});
-        console.log("yees")
     }else{
         res.status(400).send({"error": "Not Logged in"});
     }

@@ -23,7 +23,6 @@ const Login = () => {
 
 
     if (!isLogged) {
-        console.log("not Authed")
         return (
             <button onClick={auth} className='btn-login'>
                 Login with Trakt

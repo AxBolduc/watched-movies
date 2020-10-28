@@ -5,8 +5,28 @@
 
 .movieContainer{
   display: flex;
-  justify-content:space-between;
   flex-wrap: wrap;
+}
+
+.movie{
+  width:300px;
+  color: #ddd;
+  margin: 1rem;
+  background-color: #394867;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+}
+
+.movie img{
+  max-width: 100%;
+}
+
+.movie-info{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
 
 .btn-login{
