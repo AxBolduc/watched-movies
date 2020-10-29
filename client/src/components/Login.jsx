@@ -2,7 +2,7 @@ import React, {useEffect, useState}from 'react';
 const axios = require('axios');
 
 let auth = () =>{
-   window.location = "http://127.0.0.1:3000/auth/trakt";
+   window.location = "/auth/trakt";
 }
     
 const Login = () => {
