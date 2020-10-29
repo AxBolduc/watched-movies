@@ -10,7 +10,7 @@ const Movie = (props) => {
         getMovieDetails(props.ids.tmdb).then((res)=>{
             setMovie(res.data);
         })
-    },[])
+    },[props.ids.tmdb])
 
     return (
         <div className="movie">

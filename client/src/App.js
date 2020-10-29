@@ -1,30 +1,27 @@
 import './App.css';
 
-import {useEffect, useState} from 'react'
-
-import Movie from './components/Movie'
-import NavBar from './components/NavBar';
-import getPopularMovies from './apis/trakt';
-import getMovieDetails from './apis/tmdb';
+import HomePage from './pages/HomePage';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import WatchedPage from './pages/WatchedPage';
+import TrendingPage from './pages/TrendingPage';
 
 function App() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(()=>{
-    getPopularMovies().then((data)=>{
-      setMovies(data.data);
-    })
-  }, [])
+  
 
   return (
-    <>
-    <NavBar />
-    <div className="movieContainer">
-      {movies.map((movie) =>(
-        <Movie Key={movie.ids.tmdb} {...movie}/>
-      ))}
-    </div>
-    </>
+   <BrowserRouter>
+      <Switch>
+        <Route path='/' exact>
+          <HomePage />
+        </Route>
+        <Route path='/watched'>
+          <WatchedPage />
+        </Route>
+        <Route path='/trending'>
+          <TrendingPage />
+        </Route>
+      </Switch>
+    </BrowserRouter> 
   );
 }
 

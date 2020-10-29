@@ -8,10 +8,13 @@ class NavBar extends Component {
             <nav className="navBar">
                 <ul className="navList">
                     <li className="navItem">
-                        <a href='#'>Home</a>
+                        <a href='/'>Home</a>
                     </li>
                     <li className="navItem">
-                        <a href='#'>Watched</a>
+                        <a href="/trending">Trending</a>
+                    </li>
+                    <li className="navItem">
+                        <a href='/watched'>Watched</a>
                     </li>
                 </ul>
                 <Login />

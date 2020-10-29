@@ -4,13 +4,12 @@ const axios = require('axios');
 let auth = () =>{
    window.location = "http://127.0.0.1:3000/auth/trakt";
 }
-let isAuthed = false;
     
 const Login = () => {
     const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
-        const authed = axios({
+        axios({
             method: "GET",
             url: "/auth/user"
  
