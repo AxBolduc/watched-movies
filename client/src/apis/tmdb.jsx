@@ -15,5 +15,4 @@ const getMovieDetails = async (id) =>{
     }
 
 }
-
-module.exports = getMovieDetails
+export default getMovieDetails;

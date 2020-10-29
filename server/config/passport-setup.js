@@ -30,7 +30,8 @@ function(accessToken, refreshToken, params, profile, done) {
             //create user
             new User({
                 username: profile.id,
-                name: profile.username
+                name: profile.username,
+                token: accessToken
             }).save().then((user) => {
                 done(null, user);
             })

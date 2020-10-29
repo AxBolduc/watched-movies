@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     username: String,
-    name: String
+    name: String,
+    token: String
 })
 
 const User = mongoose.model('user', userSchema)
 
-module.exports =User;
+module.exports = User;

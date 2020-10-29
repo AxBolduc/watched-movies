@@ -15,9 +15,9 @@ function App() {
         <Route path='/' exact>
           <HomePage />
         </Route>
-        <Route path='/watched'>
+        {/* <Route path='/watched'>
           <WatchedPage />
-        </Route>
+        </Route> */}
         <Route path='/trending'>
           <TrendingPage />
         </Route>

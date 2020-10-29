@@ -1,7 +1,7 @@
 const { default: Axios } = require("axios")
 
 
-const getPopularMovies = async () => {
+export const getPopularMovies = async () => {
     return await Axios({
         headers: {
             "content-type": "application/json",
@@ -14,7 +14,7 @@ const getPopularMovies = async () => {
 
 }
 
-const getTrendingMovies = async () => {
+export const getTrendingMovies = async () => {
     return await Axios({
         headers: {
             "content-type": "application/json",
@@ -27,5 +27,16 @@ const getTrendingMovies = async () => {
 
 }
 
-module.exports.getPopularMovies = getPopularMovies;
-module.exports.getTrendingMovies = getTrendingMovies;
+const getWatchedMovies = async (token) => {
+    return await Axios({
+        headers: {
+            "content-type": "application/json",
+            "authorization": "Bearer " + token,
+            "trakt-api-version": 2,
+            "trakt-api-key": process.env.REACT_APP_CLIENT_ID
+        },
+        method: "GET",
+        url: "https://api.trakt.tv/sync/watched/type?limit=50"
+    })
+
+}
