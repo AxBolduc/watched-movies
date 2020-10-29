@@ -21,7 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //connect to db
-mongoose.connect(process.env.db_string, ()=>{
+mongoose.connect(process.env.DB_STRING, ()=>{
     console.log("Connected to db");
 })
 

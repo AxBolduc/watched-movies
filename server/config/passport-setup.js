@@ -15,9 +15,9 @@ passport.deserializeUser((id,done)=>{
 })
 
 passport.use(new TraktStrategy({
-    clientID: process.env.client_id,
-    clientSecret: process.env.client_secret,
-    callbackURL: "http://127.0.0.1:3000/auth/trakt/callback"
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://"+process.env.DOMAIN+":3000/auth/trakt/callback"
 },
 function(accessToken, refreshToken, params, profile, done) {
     console.log(profile);
