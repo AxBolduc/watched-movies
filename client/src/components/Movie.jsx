@@ -12,10 +12,19 @@ const Movie = (props) => {
         })
     },[props.ids.tmdb])
 
+    let imageSrc;
+
+    if(movie){
+        console.log(movie)
+        imageSrc = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+    }else{
+        imageSrc = "";
+    }
+
     return (
         <div className="movie">
             <div className="movie-header">
-                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt=""/>
+                <img src={imageSrc} alt=""/>
             </div>
             <div className="movie-info">
                 {movie.title}

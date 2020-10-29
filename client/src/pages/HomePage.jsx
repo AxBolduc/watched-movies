@@ -1,6 +1,6 @@
 import Movie from '../components/Movie'
 import NavBar from '../components/NavBar';
-import getPopularMovies from '../apis/trakt';
+import {getPopularMovies} from '../apis/trakt';
 import {useEffect, useState} from 'react'
 
 const HomePage = () => {
