@@ -17,7 +17,7 @@ passport.deserializeUser((id,done)=>{
 passport.use(new TraktStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://"+process.env.DOMAIN+"/auth/trakt/callback"
+    callbackURL: process.env.DOMAIN+"/auth/trakt/callback"
 },
 function(accessToken, refreshToken, params, profile, done) {
     User.findOne({username: profile.id}).then((user)=>{
