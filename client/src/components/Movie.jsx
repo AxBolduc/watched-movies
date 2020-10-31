@@ -15,7 +15,6 @@ const Movie = (props) => {
     let imageSrc;
 
     if(movie){
-        console.log(movie)
         imageSrc = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
     }else{
         imageSrc = "";

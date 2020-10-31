@@ -1,9 +1,7 @@
 const express=require('express');
 const cors = require('cors')
-const axios = require('axios');
-const passport = require('passport');
-const passportSetip = require('./config/passport-setup');
 const mongoose = require('mongoose');
+const passport = require('passport')
 const cookieSession = require('cookie-session');
 
 require('dotenv').config()
@@ -25,18 +23,11 @@ mongoose.connect(process.env.DB_STRING, ()=>{
     console.log("Connected to db");
 })
 
-app.get('/auth/trakt', passport.authenticate('trakt'));
-app.get('/auth/trakt/callback', passport.authenticate('trakt', {failureRedirect: "/"}), (req, res) =>{
-    res.redirect('/');
-});
-app.get('/auth/user', (req, res) =>{
-    if(req.user){
-        res.status(200).send({"user": req.user.username});
-    }else{
-        res.status(400).send({"error": "Not Logged in"});
-    }
-})
+//load external routes
+require('./routes/api')(app);
+require('./routes/auth')(app);
 
 app.listen("4000", () =>{
     console.log("listening on port 4000");
 })
+

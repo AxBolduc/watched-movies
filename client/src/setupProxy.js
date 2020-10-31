@@ -8,4 +8,11 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://' + process.env.REACT_APP_DOMAIN + ':4000',
+      changeOrigin: true,
+    })
+  );
 };

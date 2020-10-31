@@ -20,8 +20,6 @@ passport.use(new TraktStrategy({
     callbackURL: "http://"+process.env.DOMAIN+"/auth/trakt/callback"
 },
 function(accessToken, refreshToken, params, profile, done) {
-    console.log(profile);
-
     User.findOne({username: profile.id}).then((user)=>{
         if(user){
             //user exists

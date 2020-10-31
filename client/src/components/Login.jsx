@@ -12,9 +12,8 @@ const Login = () => {
         axios({
             method: "GET",
             url: "/auth/user"
- 
         }).then((res) => {
-            setIsLogged(res.status ===200);
+            setIsLogged(!!res.data.user);
         }).catch((err)=>{
             //do nothing
         });

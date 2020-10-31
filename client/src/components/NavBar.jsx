@@ -13,9 +13,9 @@ class NavBar extends Component {
                     <li className="navItem">
                         <a href="/trending">Trending</a>
                     </li>
-                    {/* <li className="navItem">
+                    <li className="navItem">
                         <a href='/watched'>Watched</a>
-                    </li> */}
+                    </li>
                 </ul>
                 <Login />
             </nav>
