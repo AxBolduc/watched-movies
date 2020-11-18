@@ -1,5 +1,4 @@
 import Movie from '../components/Movie'
-import NavBar from '../components/NavBar';
 import {getPopularMovies} from '../apis/trakt';
 import {useEffect, useState} from 'react'
 
@@ -16,7 +15,6 @@ const HomePage = () => {
 
     return (
         <>
-            <NavBar />
             <div className="movieContainer">
                 {movies.map((movie) => (
                     <Movie Key={movie.ids.tmdb} {...movie} />

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 const { default: Login } = require("./Login")
 
 class NavBar extends Component {
@@ -8,13 +9,13 @@ class NavBar extends Component {
             <nav className="navBar">
                 <ul className="navList">
                     <li className="navItem">
-                        <a href='/'>Home</a>
+                        <Link to='/'>Home</Link>
                     </li>
                     <li className="navItem">
-                        <a href="/trending">Trending</a>
+                        <Link to='/trending'>Trending</Link>
                     </li>
                     <li className="navItem">
-                        <a href='/watched'>Watched</a>
+                        <Link to='/watched'>Watched</Link>
                     </li>
                 </ul>
                 <Login />

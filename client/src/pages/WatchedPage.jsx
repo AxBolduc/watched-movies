@@ -1,5 +1,4 @@
 import {Component} from 'react';
-import NavBar from "../components/NavBar";
 import Axios from 'axios';
 import {getWatchedMovies} from '../apis/trakt';
 import Movie from '../components/Movie';
@@ -36,7 +35,6 @@ class WatchedPage extends Component {
     render() { 
         return ( 
             <>
-                <NavBar />
                 <div className="movieContainer">
                     {this.state.watchedMovies.length > 0 && this.state.watchedMovies.map((movie) => (
                         <Movie Key={movie.movie.ids.tmdb} {...movie.movie} />

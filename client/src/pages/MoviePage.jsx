@@ -1,5 +1,4 @@
 import {Component} from 'react';
-import NavBar from "../components/NavBar";
 
 class TrendingPage extends Component {
 
@@ -11,7 +10,6 @@ class TrendingPage extends Component {
     render() { 
         return ( 
             <>
-            <NavBar />
             </>
          );
     }
