@@ -2,10 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: String,
-    name: String,
-    token: String
-})
+  username: String,
+  name: String,
+  token: String,
+  refreshToken: String,
+  tokenExpirationDate: Date,
+});
 
 const User = mongoose.model('user', userSchema)
 

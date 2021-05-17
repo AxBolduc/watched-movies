@@ -23,16 +23,38 @@ function(accessToken, refreshToken, params, profile, done) {
     User.findOne({username: profile.id}).then((user)=>{
         if(user){
             //user exists
+
+            //If the token is different than the one stored in the database, update it
+            if (user.token != accessToken) {
+              user.token = accessToken;
+
+              user
+                .save()
+                .then((savedUser) => {
+                  savedUser === user;
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+
             done(null, user);
+        
         } else {
             //create user
+            let expirationDate = new Date();
+            expirationDate.setMonth(expirationDate.getMonth() + 3);
             new User({
-                username: profile.id,
-                name: profile.username,
-                token: accessToken
-            }).save().then((user) => {
-                done(null, user);
+              username: profile.id,
+              name: profile.username,
+              token: accessToken,
+              refreshToken: refreshToken,
+              tokenExpirationDate: expirationDate,
             })
+              .save()
+              .then((user) => {
+                done(null, user);
+              });
         }
     })
 
