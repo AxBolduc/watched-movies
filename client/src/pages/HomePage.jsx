@@ -2,11 +2,13 @@ import Movie from '../components/Movie'
 import {getPopularMovies} from '../apis/trakt';
 import {useEffect, useState} from 'react'
 import Modal from "../components/Modal/Modal";
+import getMovieDetails from '../apis/tmdb';
 
 const HomePage = () => {
 
     const [movies, setMovies] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+    const [modalMovie, setModalMovie] = useState({});
 
     useEffect(() => {
         getPopularMovies().then((data) => {
@@ -14,22 +16,29 @@ const HomePage = () => {
         })
     }, [])
 
-    function showModal(){
-        setModalShow(!modalShow);
-        console.log("SHOW");
-    }
-
+  function showModal(movieID) {
+		setModalShow(!modalShow);
+    getMovieDetails(movieID).then((res)=>{
+      setModalMovie(res.data);
+    })
+	}
 
     return (
-      <>
-        <div className="movieContainer">
-          {movies.map((movie) => (
-            <Movie Key={movie.ids.tmdb} {...movie} onClick={showModal}   />
-          ))}
-        </div>
-        <Modal onClose={showModal} show={modalShow}>Lappa</Modal>
-      </>
-    );
+		<>
+			<div className="movieContainer">
+				{movies.map((movie) => (
+					<Movie
+						Key={movie.ids.tmdb}
+						{...movie}
+						onClick={() => showModal(movie.ids.tmdb)}
+					/>
+				))}
+			</div>
+			<Modal onClose={() => setModalShow(false)} movie={modalMovie} show={modalShow}>
+				Lappa
+			</Modal>
+		</>
+	);
 
 }
  

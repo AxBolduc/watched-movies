@@ -9,7 +9,11 @@ export default class Modal extends Component {
 			<div className="modal">
 				<div className="modalBox">
 					<div className="modalHeader">
-						<h2 className="modalTitle">Kappa</h2>
+						<h2 className="modalTitle">
+							
+							{this.props.movie.original_title}
+						
+						</h2>
 						<span
 							className="modalClose"
 							onClick={this.props.onClose}
@@ -19,11 +23,7 @@ export default class Modal extends Component {
 					</div>
 					<div className="modalContent">
 						<p className="modalDescription">
-							Lorem, ipsum dolor sit amet consectetur adipisicing
-							elit. Dolorum magnam ipsa praesentium fugiat quasi
-							neque impedit at, consectetur dolorem maxime iure
-							quo non sed in reprehenderit assumenda recusandae,
-							eos nihil?
+							{this.props.movie.overview}
 						</p>
 					</div>
 				</div>
