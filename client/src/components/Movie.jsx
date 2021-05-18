@@ -20,16 +20,14 @@ const Movie = (props) => {
         imageSrc = "";
     }
 
-    return (
-        <div className="movie">
-            <div className="movie-header">
-                <img src={imageSrc} alt=""/>
+        return (
+            <div className="movie" onClick={props.onClick}>
+                <div className="movie-header">
+                    <img src={imageSrc} alt="" />
+                </div>
+                <div className="movie-info">{movie.title}</div>
             </div>
-            <div className="movie-info">
-                {movie.title}
-            </div>
-        </div>
-    )
+        );
 }
 
 export default Movie;
