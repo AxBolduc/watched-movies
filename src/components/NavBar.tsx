@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { Component } from "react";
-const { default: Login } = require("./Login");
+import {Login} from "../components/Login";
 
 export const NavBar: React.FunctionComponent = () => {
     return (
-        <nav className="px-4 bg-stone-800 flex justify-between rounded-b-lg">
+        <nav className="px-4 bg-stone-800 flex justify-between items-center rounded-b-lg">
             <div className="flex justify-around gap-8 w-max">
                 <Link href="/">
                     <div className="px-8 py-4 hover:bg-stone-600 text-white font-bold cursor-pointer">

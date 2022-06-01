@@ -6,7 +6,7 @@ let auth = () =>{
 //    window.location = "/auth/trakt";
 }
     
-const Login = () => {
+export const Login: React.FC= () => {
     const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Login = () => {
 
     if (!isLogged) {
         return (
-            <button onClick={auth} className='btn-login'>
+            <button onClick={auth} className='bg-stone-500 rounded p-2 text-white font-bold'>
                 Login with Trakt
             </button>
         );
@@ -32,5 +32,3 @@ const Login = () => {
     }
 
 }
- 
-export default Login;
