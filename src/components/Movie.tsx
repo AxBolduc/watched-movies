@@ -2,6 +2,7 @@ import Axios, { AxiosResponse } from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { TmdbMovieData } from "../types/Tmdb";
+import loading from "../public/images/loading.gif"
 
 interface MovieProps {
     tmdbId: number;
@@ -26,12 +27,21 @@ export const Movie: React.FunctionComponent<MovieProps> = (props) => {
 
     return (
         <div className="bg-stone-600 rounded-lg flex flex-col m-2 hover:scale-105 transition-transform">
-            <Image
+
+            {movieData === undefined ? 
+            <img
+                className="rounded-t-lg"
+                src={loading.src}
+                width={300}
+                height={450}
+            />
+            :
+            <img
                 className="rounded-t-lg"
                 width={300}
                 height={450}
                 src={`https://image.tmdb.org/t/p/w300/${movieData?.poster_path}`}
-            />
+            />}
             <div className="bg-stone-700 rounded-b-lg py-2 text-center  text-white">
                 {movieData?.title}
             </div>
