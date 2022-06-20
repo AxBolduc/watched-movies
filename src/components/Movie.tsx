@@ -42,8 +42,8 @@ export const Movie: React.FunctionComponent<MovieProps> = (props) => {
                 height={450}
                 src={`https://image.tmdb.org/t/p/w300/${movieData?.poster_path}`}
             />}
-            <div className="bg-stone-700 rounded-b-lg py-2 text-center  text-white">
-                {movieData?.title}
+            <div className="bg-stone-700 rounded-b-lg py-2 text-center text-sm h-full align-text-bottom  text-white">
+                    {movieData?.title}
             </div>
         </div>
     );
