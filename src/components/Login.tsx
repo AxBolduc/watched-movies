@@ -9,16 +9,16 @@ let auth = () =>{
 export const Login: React.FC= () => {
     const [isLogged, setIsLogged] = useState(false);
 
-    useEffect(() => {
-        axios({
-            method: "GET",
-            url: "/api/auth/user"
-        }).then((res: AxiosResponse) => {
-            setIsLogged(!!res.data.user);
-        }).catch((err: AxiosError)=>{
-            //do nothing
-        });
-    }, [])
+    // useEffect(() => {
+    //     axios({
+    //         method: "GET",
+    //         url: "/api/auth/user"
+    //     }).then((res: AxiosResponse) => {
+    //         setIsLogged(!!res.data.user);
+    //     }).catch((err: AxiosError)=>{
+    //         //do nothing
+    //     });
+    // }, [])
 
 
     if (!isLogged) {
