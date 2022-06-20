@@ -8,3 +8,7 @@ export type TraktPopularMovie = {
       tmdb: number;
     }
 }
+export type TraktTrendingMovie = {
+  "watchers": number;
+  "movie": TraktPopularMovie;
+}
