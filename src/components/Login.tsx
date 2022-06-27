@@ -1,10 +1,9 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import React, {useEffect, useState}from 'react';
+import { trpc } from '../util/trpc';
 const axios = require('axios');
 
-let auth = () =>{
-//    window.location = "/auth/trakt";
-}
+
     
 export const Login: React.FC= () => {
     const [isLogged, setIsLogged] = useState(false);
@@ -23,7 +22,7 @@ export const Login: React.FC= () => {
 
     if (!isLogged) {
         return (
-            <button onClick={auth} className='bg-stone-500 rounded p-2 text-white font-bold'>
+            <button className='bg-stone-500 rounded p-2 text-white font-bold'>
                 Login with Trakt
             </button>
         );

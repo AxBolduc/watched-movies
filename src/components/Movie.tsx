@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { TmdbMovieData } from "../types/Tmdb";
 import loading from "../public/images/loading.gif"
+import { trpc } from "../util/trpc";
 
 interface MovieProps {
     tmdbId: number;
@@ -11,24 +12,12 @@ interface MovieProps {
 export const Movie: React.FunctionComponent<MovieProps> = (props) => {
     const [movieData, setMovieData] = useState<TmdbMovieData>();
 
-    useEffect(() => {
-        let mounted = true;
-        if (mounted) {
-            Axios({
-                url: `/api/tmdb/${props.tmdbId}`,
-            }).then((res: AxiosResponse) => {
-                setMovieData(res.data);
-            });
-        }
-        return () => {
-            mounted = false;
-        };
-    }, []);
+    const {data, isLoading} = trpc.useQuery(['getMovieData', {tmdbId: props.tmdbId}]);
 
     return (
         <div className="bg-stone-600 rounded-lg flex flex-col m-2 hover:scale-105 transition-transform">
 
-            {movieData === undefined ? 
+            {isLoading ? 
             <img
                 className="rounded-t-lg"
                 src={loading.src}
@@ -40,10 +29,10 @@ export const Movie: React.FunctionComponent<MovieProps> = (props) => {
                 className="rounded-t-lg"
                 width={300}
                 height={450}
-                src={`https://image.tmdb.org/t/p/w300/${movieData?.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w300/${data?.poster_path}`}
             />}
             <div className="bg-stone-700 rounded-b-lg py-2 text-center text-sm h-full align-text-bottom  text-white">
-                    {movieData?.title}
+                    {data?.title}
             </div>
         </div>
     );
