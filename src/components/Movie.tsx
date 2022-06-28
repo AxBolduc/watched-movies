@@ -12,7 +12,7 @@ interface MovieProps {
 export const Movie: React.FunctionComponent<MovieProps> = (props) => {
     const [movieData, setMovieData] = useState<TmdbMovieData>();
 
-    const {data, isLoading} = trpc.useQuery(['getMovieData', {tmdbId: props.tmdbId}]);
+    const {data, isLoading} = trpc.useQuery(['public.getMovieData', {tmdbId: props.tmdbId}]);
 
     return (
         <div className="bg-stone-600 rounded-lg flex flex-col m-2 hover:scale-105 transition-transform">

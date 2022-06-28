@@ -29,7 +29,7 @@ export const appRouter = trpc
             };
         },
     })
-    .query("getMovieData", {
+    .query("public.getMovieData", {
         input: z.object({
             tmdbId: z.number(),
         }),
