@@ -1,11 +1,9 @@
-import { AxiosError, AxiosResponse } from 'axios';
-import React, {useEffect, useState}from 'react';
-import { trpc } from '../util/trpc';
-const axios = require('axios');
+import { AxiosError, AxiosResponse } from "axios";
+import React, { useEffect, useState } from "react";
+import { trpc } from "../util/trpc";
+const axios = require("axios");
 
-
-    
-export const Login: React.FC= () => {
+export const Login: React.FC = () => {
     const [isLogged, setIsLogged] = useState(false);
 
     // useEffect(() => {
@@ -19,15 +17,13 @@ export const Login: React.FC= () => {
     //     });
     // }, [])
 
-
     if (!isLogged) {
         return (
-            <button className='bg-stone-500 rounded p-2 text-white font-bold'>
+            <button className="bg-stone-500 rounded p-2 text-white font-bold">
                 Login with Trakt
             </button>
         );
-    }else{
+    } else {
         return null;
     }
-
-}
+};

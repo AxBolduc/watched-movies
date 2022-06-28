@@ -3,20 +3,19 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import Axios from "axios";
 import { z } from "zod";
 import { TmdbMovieData } from "../../../types/Tmdb";
-import { TraktPopularMovie } from "../../../types/Trakt";
+import { TraktPopularMovie, TraktTrendingMovie } from "../../../types/Trakt";
 
 export const createContext = async ({
-  req,
-  res,
-}: trpcNext.CreateNextContextOptions) => {
-  return {
     req,
     res,
-  };
+}: trpcNext.CreateNextContextOptions) => {
+    return {
+        req,
+        res,
+    };
 };
 
 type Context = trpc.inferAsyncReturnType<typeof createContext>;
-
 
 export const appRouter = trpc
     .router<Context>()
@@ -44,20 +43,37 @@ export const appRouter = trpc
     })
     .query("public.getPopularMovies", {
         input: z.object({
-            nMovies: z.number().nullable().default(50)
+            nMovies: z.number().nullable().default(50),
         }),
-        async resolve({input}): Promise<Array<TraktPopularMovie>>{
+        async resolve({ input }): Promise<Array<TraktPopularMovie>> {
             const req = await Axios({
                 headers: {
                     "content-type": "application/json",
                     "trakt-api-version": 2,
-                    "trakt-api-key": process.env.TRAKT_CLIENT_ID!
+                    "trakt-api-key": process.env.TRAKT_CLIENT_ID!,
                 },
                 method: "GET",
                 url: `https://api.trakt.tv/movies/popular?limit=${input.nMovies}`,
             });
             return req.data;
-        }
+        },
+    })
+    .query("public.getTrendingMovies", {
+        input: z.object({
+            nMovies: z.number().nullable().default(50),
+        }),
+        async resolve({ input }): Promise<Array<TraktTrendingMovie>> {
+            const req = await Axios({
+                headers: {
+                    "content-type": "application/json",
+                    "trakt-api-version": 2,
+                    "trakt-api-key": process.env.TRAKT_CLIENT_ID!,
+                },
+                method: "GET",
+                url: `https://api.trakt.tv/movies/trending?limit=${input.nMovies}`,
+            });
+            return req.data;
+        },
     });
 
 export type AppRouter = typeof appRouter;
@@ -65,7 +81,7 @@ export type AppRouter = typeof appRouter;
 export default trpcNext.createNextApiHandler({
     router: appRouter,
     createContext,
-    responseMeta({ctx, paths, type, errors }) {
+    responseMeta({ ctx, paths, type, errors }) {
         // assuming you have all your public routes with the keyword `public` in them
         const allPublic =
             paths && paths.every((path) => path.includes("public"));

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { Component } from "react";
-import {Login} from "../components/Login";
+import { Login } from "../components/Login";
 
 export const NavBar: React.FunctionComponent = () => {
     return (
