@@ -3,6 +3,7 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import Axios from "axios";
 import { z } from "zod";
 import { TmdbMovieData } from "../../../types/Tmdb";
+import { TraktPopularMovie } from "../../../types/Trakt";
 
 export const createContext = async ({
   req,
@@ -40,6 +41,23 @@ export const appRouter = trpc
             });
             return req.data;
         },
+    })
+    .query("public.getPopularMovies", {
+        input: z.object({
+            nMovies: z.number().nullable().default(50)
+        }),
+        async resolve({input}): Promise<Array<TraktPopularMovie>>{
+            const req = await Axios({
+                headers: {
+                    "content-type": "application/json",
+                    "trakt-api-version": 2,
+                    "trakt-api-key": process.env.TRAKT_CLIENT_ID!
+                },
+                method: "GET",
+                url: `https://api.trakt.tv/movies/popular?limit=${input.nMovies}`,
+            });
+            return req.data;
+        }
     });
 
 export type AppRouter = typeof appRouter;
