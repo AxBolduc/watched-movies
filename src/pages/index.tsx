@@ -7,7 +7,7 @@ import { trpc } from "../util/trpc";
 
 const Home = () => {
     const { data, isLoading } = trpc.useQuery([
-        "getPopularMovies",
+        "public.getPopularMovies",
         { nMovies: 50 },
     ]);
 

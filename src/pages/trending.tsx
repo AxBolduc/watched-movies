@@ -8,7 +8,7 @@ const { default: Axios } = require("axios");
 
 const Trending = () => {
     const { data } = trpc.useQuery([
-        "getTrendingMovies",
+        "public.getTrendingMovies",
         { nMovies: 50 },
     ]);
 
