@@ -9,4 +9,9 @@ export default NextAuth({
             clientSecret: process.env.TRAKT_CLIENT_SECRET!,
         }),
     ],
+    callbacks: {
+        jwt({ token, user, account, profile, isNewUser }){
+            return {access_token: account?.access_token, ...token};
+        }
+    }
 });

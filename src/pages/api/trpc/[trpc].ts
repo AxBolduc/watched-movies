@@ -1,9 +1,10 @@
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import Axios from "axios";
+import { getToken } from "next-auth/jwt";
 import { z } from "zod";
 import { TmdbMovieData } from "../../../types/Tmdb";
-import { TraktPopularMovie, TraktTrendingMovie } from "../../../types/Trakt";
+import { TraktPopularMovie, TraktTrendingMovie, TraktWatchedMovie } from "../../../types/Trakt";
 
 export const createContext = async ({
     req,
@@ -41,7 +42,7 @@ export const appRouter = trpc
             return req.data;
         },
     })
-    .query("public.getPopularMovies", {
+    .query("getPopularMovies", {
         input: z.object({
             nMovies: z.number().nullable().default(50),
         }),
@@ -58,7 +59,7 @@ export const appRouter = trpc
             return req.data;
         },
     })
-    .query("public.getTrendingMovies", {
+    .query("getTrendingMovies", {
         input: z.object({
             nMovies: z.number().nullable().default(50),
         }),
@@ -74,6 +75,22 @@ export const appRouter = trpc
             });
             return req.data;
         },
+    })
+    .query("getUserWatchedMovies", {
+        async resolve({ctx}): Promise<Array<TraktWatchedMovie>> {
+            const token = await getToken({req: ctx.req, secret: process.env.NEXTAUTH_SECRET});
+            const req = await Axios({
+                headers: {
+                    "content-type": "application/json",
+                    "trakt-api-version": 2,
+                    "trakt-api-key": process.env.TRAKT_CLIENT_ID!,
+                    "Authorization": `Bearer ${token?.access_token}`,
+                },
+                method: "GET",
+                url: `https://api.trakt.tv/users/me/history/movies`,
+            });
+            return req.data;
+        }
     });
 
 export type AppRouter = typeof appRouter;
@@ -82,15 +99,10 @@ export default trpcNext.createNextApiHandler({
     router: appRouter,
     createContext,
     responseMeta({ ctx, paths, type, errors }) {
-        // assuming you have all your public routes with the keyword `public` in them
-        const allPublic =
-            paths && paths.every((path) => path.includes("public"));
-        // checking that no procedures errored
         const allOk = errors.length === 0;
-        // checking we're doing a query request
         const isQuery = type === "query";
 
-        if (ctx?.res && allPublic && allOk && isQuery) {
+        if (ctx?.res && paths && allOk && isQuery) {
             // cache request for 1 day + revalidate once every second
             const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
             return {
