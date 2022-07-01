@@ -18,25 +18,33 @@ export const Movie: React.FunctionComponent<MovieProps> = (props) => {
     ]);
 
     return (
-        <div className="bg-stone-600 rounded-lg flex flex-col m-2 hover:scale-105 transition-transform">
+        <div className="movie-card group">
             {isLoading ? (
                 <img
-                    className="rounded-t-lg"
+                    className="rounded-lg"
                     src={loading.src}
                     width={300}
                     height={450}
                 />
             ) : (
                 <img
-                    className="rounded-t-lg"
+                    className="rounded-lg"
                     width={300}
                     height={450}
                     src={`https://image.tmdb.org/t/p/w300/${data?.poster_path}`}
                 />
             )}
-            <div className="bg-stone-700 rounded-b-lg py-2 text-center text-sm h-full align-text-bottom  text-white">
-                {data?.title}
+            <div className="movie-card-info group-hover:bg-opacity-70 group-hover:opacity-100 group-hover:h-full">
+                <h2 className="text-white text-center font-bold text-2xl py-4 bg-stone-700 rounded-t-lg shadow-md">
+                    {data?.title}
+                </h2>
+                <p className="text-white mt-2 px-2">
+                    {data?.tagline}
+                </p>
             </div>
+            {/* <div className="bg-stone-700 rounded-b-lg py-2 text-center text-sm h-full align-text-bottom  text-white">
+                {data?.title}
+            </div> */}
         </div>
     );
 };
