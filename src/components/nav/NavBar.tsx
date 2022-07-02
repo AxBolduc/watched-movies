@@ -1,4 +1,4 @@
-import { Disclosure, Transition } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useState } from "react";
 import { Login } from "../Login";
