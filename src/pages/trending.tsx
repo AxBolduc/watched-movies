@@ -1,10 +1,6 @@
-import { AxiosResponse } from "axios";
-import type { NextPage } from "next";
 import { Movie } from "../components/Movie";
-import { NavBar } from "../components/NavBar";
-import { TraktTrendingMovie } from "../types/Trakt";
+import { NavBar } from "../components/nav/NavBar";
 import { trpc } from "../util/trpc";
-const { default: Axios } = require("axios");
 
 const Trending = () => {
     const { data } = trpc.useQuery([

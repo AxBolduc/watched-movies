@@ -1,9 +1,6 @@
-import { useSession } from "next-auth/react";
 import { Movie } from "../components/Movie";
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../components/nav/NavBar";
 import { trpc } from "../util/trpc";
-
-
 
 const Home = () => {
     const { data, isLoading } = trpc.useQuery([

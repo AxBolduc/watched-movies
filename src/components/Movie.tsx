@@ -1,6 +1,4 @@
-import Axios, { AxiosResponse } from "axios";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TmdbMovieData } from "../types/Tmdb";
 import loading from "../public/images/loading.gif";
 import { trpc } from "../util/trpc";
